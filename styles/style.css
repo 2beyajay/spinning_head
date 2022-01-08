@@ -1,26 +1,4 @@
 body {
   background-color: #BFA249;
 }
-
-nav {
-  position: fixed;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: right;
-      -ms-flex-align: right;
-          align-items: right;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
-  gap: 10px;
-  width: 90%;
-  height: 50px;
-}
-
-nav img {
-  -ms-flex-item-align: right;
-      -ms-grid-row-align: right;
-      align-self: right;
-}
 /*# sourceMappingURL=style.css.map */

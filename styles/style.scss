@@ -8,17 +8,3 @@ body{
 	background-color: $clr-primary;
 }
 
-nav{
-	position: fixed;
-	display: flex;
-	align-items: right;
-	justify-content: right;
-	gap: 10px;
-	width: 90%;
-	height: 50px;
-
-	img{
-		// width: 50px;
-		align-self: right;
-	}
-}
