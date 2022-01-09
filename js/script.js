@@ -9,73 +9,79 @@ window.addEventListener("load", function () {
 	animation_holder.style.width = conor_thinking.offsetWidth / 1.01 + 'px'
 
 	// running animation using gsap
-	animateColor()
-	animateImages()
+	// animateColor()
+	// animateImages()
 
-	// testAnimation()
+	screen1and2()
 })
 
-function testAnimation() {
-	const $img2 = document.querySelector('.image2');
-	const $logo = document.querySelector('.transition__logo');
-	const $frameBlack = document.querySelector('.page-transition__black');
-	const $frameRed = document.querySelector('.page-transition__red');
-	const $container = document.querySelector('#container');
+function screen1and2() {
+	let lifted = document.querySelector('#lifted')
+	let or = document.querySelector('#or')
+	let theStory = document.querySelector('#the-story')
+	let keepYour = document.querySelector('#keep-your')
 
-	let tltransition = new gsap.timeline({
-			paused: false,
-			delay: 0,
-			stagger: 2,
-		})
-		.fromTo($frameRed, 2.2, {
-			scaleX: 0
-		}, {
-			scaleX: 1,
-			transformOrigin: 'left',
-			ease: Power4.easeInOut
-		}, )
-		.fromTo($frameBlack, 2.2, {
-			scaleX: 0
-		}, {
-			scaleX: 1,
-			transformOrigin: 'left',
-			ease: Power4.easeInOut
-		}, .2)
-		.fromTo($logo, 1.6, {
-			xPercent: -100,
-			autoAlpha: 0
-		}, {
-			xPercent: 0,
-			autoAlpha: 1,
-			ease: Power4.easeInOut
-		}, .7)
-		.set($frameRed, {
-			scaleX: 0
-		})
-		.set($img2, {
-			autoAlpha: 0
-		})
-		.to($frameBlack, 2.2, {
-			scaleX: 0,
-			transformOrigin: 'right',
-			ease: Power4.easeInOut
-		})
-		.to($logo, .2, {
-			autoAlpha: 0
-		}, '-=1.2')
+	let t1 = gsap.timeline()
 
-	$button.addEventListener('click', () => {
-		tltransition.play(0);
-	});
+	t1.fromTo(lifted, {
+		y: window.innerHeight,
+		opacity: 0,
+		delay: .5
+	}, {
+		opacity: 1,
+		y: window.innerHeight / 5,
+		duration: 5,
+		ease: Power3.easeInOut
+	})
+	.fromTo(or, {
+		yPercent: 100,
+		opacity: 0
+	}, {
+		opacity: 1,
+		y: window.innerHeight / 7,
+		duration: 1.5,
+		ease: Power3.easeInOut
+	})
+	.fromTo(theStory, {
+		yPercent: 100,
+		opacity: 0
+	}, {
+		opacity: 1,
+		y: window.innerHeight / 6,
+		duration: 1.5,
+		ease: Power3.easeInOut
+	})
+	.fromTo(keepYour, {
+		yPercent: 100,
+		opacity: 0
+	}, {
+		opacity: 1,
+		y: window.innerHeight / 5.75,
+		duration: 1.5,
+		ease: Power3.easeInOut,
+	})
+	.to([lifted, or, theStory, keepYour], {
+		opacity: 0,
+		y: -window.innerHeight,
+		duration: 1,
+		ease: Power3.easeIn,
+		delay: 2
+	})
 
 }
 
+function screen2(){
+	let lifted = document.querySelector('#lifted')
+	let or = document.querySelector('#or')
+	let theStory = document.querySelector('#the-story')
+	let keepYour = document.querySelector('#keep-your')
+}
 
 
 
 function animateColor() {
 	const conor_thinking_svg = document.querySelector('#conor-thinking').contentDocument
-	const svg_cls_1 = conor_thinking_svg.querySelector('.cls-1')
+	/* const svg_cls_1 = conor_thinking_svg.querySelector('.cls-1') */
 
 	const colorChangeDuration = 2;
 	const colorChangeDelay = 0.5;
@@ -83,13 +89,14 @@ function animateColor() {
 	let bodyColor = gsap.timeline({
 		repeat: -1,
 		yoyo: true,
+		delay: 0.5,
 		repeatDelay: colorChangeDelay
 	})
-	let svgColor = gsap.timeline({
+	/* let svgColor = gsap.timeline({
 		repeat: -1,
 		yoyo: true,
 		repeatDelay: colorChangeDelay
-	})
+	}) */
 
 	bodyColor
 		.to('body', {
@@ -109,7 +116,7 @@ function animateColor() {
 			duration: colorChangeDuration,
 		})
 
-	svgColor
+	/* svgColor
 		.to(svg_cls_1, {
 			fill: '#1ddce3',
 			duration: colorChangeDuration,
@@ -125,7 +132,7 @@ function animateColor() {
 		.to(svg_cls_1, {
 			fill: '#BFA249',
 			duration: colorChangeDuration,
-		})
+		}) */
 
 	// primary = #BFA249
 	// bubblegum blue = #1ddce3
