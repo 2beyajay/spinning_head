@@ -1,10 +1,4 @@
 window.addEventListener("load", function () {
-	const conor_thinking = document.querySelector('#conor-thinking')
-
-	// running animation using gsap
-	// animateColor()
-	// animateImages()
-
 	transitions()
 })
 
@@ -178,6 +172,7 @@ function animateColor() {
 function animateImages() {
 	const conor_thinking = document.querySelector('#conor-thinking')
 	const animation_holder = document.querySelector('.animation-holder')
+	const objectContainer = document.querySelector('.object-container')
 
 	// animation holder stlying based on the svg
 	animation_holder.style.height = conor_thinking.offsetHeight / 1.95 + 'px'
@@ -192,9 +187,7 @@ function animateImages() {
 		totalOffset += img.offsetWidth
 	});
 
-	console.log(totalOffset);
 	totalOffset = totalOffset - ((images[images.length - 1].offsetWidth) * 1.5)
-	console.log(totalOffset);
 
 	gsap.to(images,{
 			opacity: 1,
@@ -213,4 +206,17 @@ function animateImages() {
 		ease: Linear.easeNone
 	})
 
+
+	let rotationTimeline = gsap.timeline({
+		repeat:-1,
+	})
+
+	rotationTimeline
+	.fromTo([animation_holder, objectContainer], {
+		rotationY:0
+	},{
+		rotationY:360,
+		duration: 10,
+		ease: Power0.easeNone
+	})
 }
