@@ -1,33 +1,37 @@
 window.addEventListener("load", function () {
 	const conor_thinking = document.querySelector('#conor-thinking')
 
-	const animation_holder = document.querySelector('.animation-holder')
-
-	// animation holder stlying based on the svg
-	animation_holder.style.height = conor_thinking.offsetHeight / 1.95 + 'px'
-	animation_holder.style.paddingTop = conor_thinking.offsetHeight / 19 + 'px'
-	animation_holder.style.width = conor_thinking.offsetWidth / 1.01 + 'px'
-
 	// running animation using gsap
 	// animateColor()
 	// animateImages()
 
-	screen1and2()
+	transitions()
 })
 
-function screen1and2() {
-	let lifted = document.querySelector('#lifted')
-	let or = document.querySelector('#or')
-	let theStory = document.querySelector('#the-story')
-	let keepYour = document.querySelector('#keep-your')
+function transitions() {
+	// screen1
+	const screen1 = document.querySelector('#screen1')
+	const lifted = document.querySelector('#lifted')
+	const or = document.querySelector('#or')
+	const theStory = document.querySelector('#the-story')
+	const keepYour = document.querySelector('#keep-your')
+
+	// screen2
+	const screen2 = document.querySelector('#screen2')
+	const conor_thinking_svg = document.querySelector('#nothing-crossed').contentDocument
+	const nothing = conor_thinking_svg.querySelector('#nothing')
+	const cross = conor_thinking_svg.querySelector('#cross')
+
+	// aniamtion container
+	const animationContainer = document.querySelector('.container')
 
 	let t1 = gsap.timeline()
 
 	t1.fromTo(lifted, {
 		y: window.innerHeight,
 		opacity: 0,
-		delay: .5
 	}, {
+		delay: 1,
 		opacity: 1,
 		y: window.innerHeight / 5,
 		duration: 5,
@@ -65,38 +69,66 @@ function screen1and2() {
 		y: -window.innerHeight,
 		duration: 1,
 		ease: Power3.easeIn,
-		delay: 2
+		delay: 2,
+		onComplete: function(){screen1.style.display='none'; screen2.style.display="grid"}
+	})
+	.fromTo(screen2,{ 
+			opacity: 0
+		}, {
+			delay:1,
+			opacity: 1,
+			duration: 1,
+		}
+	)
+	.fromTo(cross, {
+			opacity: 0
+		},{
+			duration:0.75,
+			ease: Power0.easeNone,
+			opacity: 1
+		}
+	)
+	.fromTo(cross, {
+			transform: 'scaleX(0)'
+		},{
+			transform: 'scaleX(1)',
+			duration: 1
+		}
+	)
+	.to(screen2,{
+		delay:1.5,
+		duration:1,
+		y: window.innerHeight*1.5,
+		ease: Back.easeIn.config(1.4),
+		onComplete: function(){screen2.style.display='none'; animationContainer.style.display = 'flex';}
+	})
+	.to(animationContainer,{
+		opacity:1,
+		duration:1,
+		onComplete: function(){animateColor();}
 	})
 
-}
-
-function screen2(){
-	let lifted = document.querySelector('#lifted')
-	let or = document.querySelector('#or')
-	let theStory = document.querySelector('#the-story')
-	let keepYour = document.querySelector('#keep-your')
 }
 
 
 
 function animateColor() {
 	const conor_thinking_svg = document.querySelector('#conor-thinking').contentDocument
-	/* const svg_cls_1 = conor_thinking_svg.querySelector('.cls-1') */
+	const svg_cls_1 = conor_thinking_svg.querySelector('.cls-1')
 
-	const colorChangeDuration = 2;
+	const colorChangeDuration = 5;
 	const colorChangeDelay = 0.5;
 
 	let bodyColor = gsap.timeline({
 		repeat: -1,
 		yoyo: true,
-		delay: 0.5,
 		repeatDelay: colorChangeDelay
 	})
-	/* let svgColor = gsap.timeline({
+	let svgColor = gsap.timeline({
 		repeat: -1,
 		yoyo: true,
 		repeatDelay: colorChangeDelay
-	}) */
+	})
 
 	bodyColor
 		.to('body', {
@@ -116,7 +148,7 @@ function animateColor() {
 			duration: colorChangeDuration,
 		})
 
-	/* svgColor
+	svgColor
 		.to(svg_cls_1, {
 			fill: '#1ddce3',
 			duration: colorChangeDuration,
@@ -132,7 +164,9 @@ function animateColor() {
 		.to(svg_cls_1, {
 			fill: '#BFA249',
 			duration: colorChangeDuration,
-		}) */
+		})
+
+	animateImages();
 
 	// primary = #BFA249
 	// bubblegum blue = #1ddce3
@@ -142,10 +176,17 @@ function animateColor() {
 }
 
 function animateImages() {
+	const conor_thinking = document.querySelector('#conor-thinking')
+	const animation_holder = document.querySelector('.animation-holder')
+
+	// animation holder stlying based on the svg
+	animation_holder.style.height = conor_thinking.offsetHeight / 1.95 + 'px'
+	animation_holder.style.paddingTop = conor_thinking.offsetHeight / 19 + 'px'
+	animation_holder.style.width = conor_thinking.offsetWidth / 1.01 + 'px'
 
 	let images = document.querySelectorAll('.animation-holder img')
-	// getting combined width of all images in the animation
 
+	// getting combined width of all images in the animation
 	let totalOffset = 0;
 	images.forEach(img => {
 		totalOffset += img.offsetWidth
@@ -155,14 +196,19 @@ function animateImages() {
 	totalOffset = totalOffset - ((images[images.length - 1].offsetWidth) * 1.5)
 	console.log(totalOffset);
 
+	gsap.to(images,{
+			opacity: 1,
+			duration: 1
+		}
+	)
+
 	let imageTrain = gsap.timeline({
 		repeat: -1,
-		repeatDelay: 0.5,
 	})
 
 	imageTrain.to(images, {
 		x: -totalOffset,
-		duration: 5,
+		duration: images.length*2,
 		repeat: -1,
 		ease: Linear.easeNone
 	})

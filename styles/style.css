@@ -16,7 +16,7 @@ main {
   position: relative;
 }
 
-main .screen1 {
+main #screen1 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -24,59 +24,53 @@ main .screen1 {
   right: 0;
 }
 
-main .screen1 * {
-  opacity: 0;
-}
-
-main .screen1 img {
+main #screen1 img {
   width: 100vw;
 }
 
-main .screen1 h1, main .screen1 h2, main .screen1 h3, main .screen1 h4, main .screen1 h5, main .screen1 h6 {
+main #screen1 h1, main #screen1 h2, main #screen1 h3, main #screen1 h4, main #screen1 h5, main #screen1 h6 {
   color: #493021;
   text-align: center;
 }
 
-main .screen1 h1 {
+main #screen1 h1 {
   font-style: italic;
   font-weight: 400;
   font-size: 5rem;
   color: #493021;
 }
 
-main .screen1 h2 {
+main #screen1 h2 {
   font-style: italic;
   font-weight: 400;
   font-size: 3.5rem;
   color: #493021;
 }
 
-main .screen1 h3 {
+main #screen1 h3 {
   font-style: italic;
   font-weight: 400;
   font-size: 3rem;
   color: #493021;
 }
 
-main .screen2 {
+main #screen2 {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  opacity: 0;
   display: -ms-grid;
   display: grid;
+  opacity: 0;
   place-items: center;
 }
 
 .container {
   height: 100vh;
   width: 100vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   display: none;
+  opacity: 0;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -96,10 +90,10 @@ main .screen2 {
 .container .animation-holder img {
   height: 100%;
   width: auto;
+  opacity: 0;
 }
 
 .container .object-container {
-  background-image: url(https://via.placeholder.com/250);
   position: relative;
   width: clamp(200px, 75%, 630px);
 }
